@@ -27,3 +27,13 @@ def solve_quadratic(a: float, b: float, c: float) -> tuple[float, ...]:
 
     root = sqrt(discriminant)
     return tuple(sorted(((-b - root) / (2 * a), (-b + root) / (2 * a))))
+
+
+def find_roots(a: float, b: float, c: float) -> tuple[float, ...] | None:
+    """Return real roots using the public ``None`` result for no roots.
+
+    A negative discriminant produces complex roots; this real-valued API
+    represents that case with ``None`` instead of returning complex numbers.
+    """
+    roots = solve_quadratic(a, b, c)
+    return roots or None
