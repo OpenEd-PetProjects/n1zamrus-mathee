@@ -1,6 +1,24 @@
 import unittest
 
-from quadratic import solve_quadratic
+from quadratic import find_roots, solve_quadratic
+
+
+class FindRootsTests(unittest.TestCase):
+    def test_returns_two_real_roots(self):
+        self.assertEqual(find_roots(1, -3, 2), (1.0, 2.0))
+
+    def test_returns_one_root_for_zero_discriminant(self):
+        self.assertEqual(find_roots(1, 4, 4), (-2.0,))
+
+    def test_returns_none_for_complex_roots(self):
+        self.assertIsNone(find_roots(1, 0, 1))
+
+    def test_supports_linear_equations(self):
+        self.assertEqual(find_roots(0, 2, -6), (3.0,))
+
+    def test_rejects_equation_with_infinite_roots(self):
+        with self.assertRaises(ValueError):
+            find_roots(0, 0, 0)
 
 
 class SolveQuadraticTests(unittest.TestCase):
